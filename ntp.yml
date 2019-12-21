@@ -1,0 +1,27 @@
+---
+- name: install initial packaged on all boxes
+  hosts: all
+  remote_user: ansible
+  become: yes
+
+  tasks:
+  - name: remove chrony package
+    yum:
+      name: chrony
+      state: absent
+
+  - name: check/install ntp package
+    yum:
+      name: ntp
+      state: present
+
+  - name: deploy ntp conf
+    template:
+      src: ntp.conf
+      dest: /etc/ntp.conf
+
+  - name: start ntp
+    service:
+      name: ntpd
+      state: restarted
+      enabled: yes
