@@ -1,5 +1,5 @@
 ---
-- name: task files for ntp clients
+- name: ntp clients task files
   hosts: all
   remote_user: ansible
   become: yes
